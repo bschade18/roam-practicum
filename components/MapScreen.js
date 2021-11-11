@@ -19,7 +19,6 @@ const MapScreen = () => {
       'https://www.letsroam.com/coding-challenge-endpoint?password=81j2jj210a9'
     ).then(
       (responseData) => {
-        console.log(responseData);
         setData(responseData);
         setStatus('success');
       },

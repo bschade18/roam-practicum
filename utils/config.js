@@ -1,0 +1,1 @@
+export const photoUrl = 'https://photos.letsroam.com/scavenger_hunt_locations';

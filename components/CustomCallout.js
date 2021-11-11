@@ -1,12 +1,13 @@
 import React from 'react';
 import { Callout } from 'react-native-maps';
-
+import { photoUrl } from '../utils/config';
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 
 const CustomCallout = ({
   hunt: { distance_miles, name, description, photo_thumb },
 }) => {
   const miles = Number(distance_miles).toFixed(2);
+
   return (
     <Callout>
       <View>
@@ -19,7 +20,7 @@ const CustomCallout = ({
           <Image
             style={styles.huntThumb}
             source={{
-              uri: `https://photos.letsroam.com/scavenger_hunt_locations/${photo_thumb}`,
+              uri: `${photoUrl}/${photo_thumb}`,
             }}
           />
         </View>

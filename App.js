@@ -1,46 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { client } from './utils/api-client';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+const Tab = createBottomTabNavigator();
+import * as WebBrowser from 'expo-web-browser';
+import MapScreen from './components/MapScreen';
 
 export default function App() {
-  const [status, setStatus] = React.useState('idle');
-  const [data, setData] = useState();
-  const [error, setError] = React.useState();
-
-  const isLoading = status === 'loading';
-  const isSuccess = status === 'success';
-  const isError = status === 'error';
-
-  useEffect(() => {
-    client(
-      'https://www.letsroam.com/coding-challenge-endpoint?password=81j2jj210a9'
-    ).then(
-      (responseData) => {
-        setData(responseData);
-        setStatus('success');
-      },
-      (errorData) => {
-        setError(errorData);
-        setStatus('error');
-      }
-    );
-  }, []);
-
   return (
-    <View style={styles.container}>
-      {isError && <Text>There was an error</Text>}
-      {isSuccess && <Text>Let's Roam!!!!</Text>}
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Map" component={MapScreen} />
+      </Tab.Navigator>
+      <Pressable
+        style={styles.button}
+        title="Open Blog"
+        onPress={() =>
+          WebBrowser.openBrowserAsync('http://letsroam.com/explorer/')
+        }
+      >
+        <Text style={styles.text}>Open Blog</Text>
+      </Pressable>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: 'blue',
+    marginTop: 200,
+  },
+  text: {
+    color: 'white',
   },
 });

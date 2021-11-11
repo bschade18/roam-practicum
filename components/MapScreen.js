@@ -1,6 +1,5 @@
-// import * as React from 'react';
 import React, { useState, useEffect } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { client } from '../utils/api-client';
@@ -40,23 +39,34 @@ const MapScreen = () => {
           longitudeDelta: 0.0,
         }}
       >
-        {isError && <Text>There was an error</Text>}
+        {isError && <Text>There was an error: {error.message}</Text>}
         {isSuccess &&
           data.map((hunt, index) => {
             let latitude;
             let longitude;
             if (hunt.lat_long) {
               [latitude, longitude] = hunt.lat_long.split(',');
-            }
+              latitude = Number(latitude);
+              longitude = Number(longitude);
 
-            return (
-              <Marker
-                key={index}
-                coordinate={{ latitude, longitude }}
-                title={hunt.name}
-                description={hunt.description}
-              />
-            );
+              return (
+                <Marker
+                  key={index}
+                  coordinate={{ latitude, longitude }}
+                  title={hunt.name}
+                  description={hunt.description}
+                >
+                  <Callout>
+                    <View>
+                      <View style={styles.bubble}>
+                        <Text style={styles.title}>{hunt.name}</Text>
+                        <Text>{hunt.description}</Text>
+                      </View>
+                    </View>
+                  </Callout>
+                </Marker>
+              );
+            }
           })}
       </MapView>
     </View>
@@ -73,6 +83,18 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  bubble: {
+    flexDirection: 'column',
+    alignSelf: 'flex-start',
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    padding: 15,
+  },
+  title: {
+    fontSize: 16,
+    marginBottom: 5,
+    fontWeight: 'bold',
   },
 });
 

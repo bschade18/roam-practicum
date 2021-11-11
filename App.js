@@ -36,13 +36,7 @@ export default function App() {
           component={MapScreen}
           options={{
             tabBarIcon: ({ focused }) => (
-              <View
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '15%',
-                }}
-              >
+              <View style={styles.tabContainer}>
                 <FontAwesome5
                   name="map-marker-alt"
                   size={25}
@@ -60,12 +54,7 @@ export default function App() {
           WebBrowser.openBrowserAsync('http://letsroam.com/explorer/')
         }
       >
-        <View
-          style={{
-            position: 'absolute',
-            top: '50%',
-          }}
-        >
+        <View style={styles.blogIconContainer}>
           <FontAwesome5 name="book" size={25} color="gray"></FontAwesome5>
         </View>
       </Pressable>
@@ -84,6 +73,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 58,
     marginLeft: 200,
+  },
+  tabContainer: {
+    position: 'absolute',
+    top: '50%',
+    left: '15%',
+  },
+  blogIconContainer: {
+    position: 'absolute',
+    top: '50%',
   },
   text: {
     color: 'white',

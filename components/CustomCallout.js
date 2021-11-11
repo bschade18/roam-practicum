@@ -10,7 +10,7 @@ const CustomCallout = ({ hunt: { distance_miles, name, description } }) => {
       <View>
         <View style={styles.bubble}>
           <Text style={styles.title}>{name}</Text>
-          <Text>{description}</Text>
+          <Text style={styles.description}>{description}</Text>
           <Text>
             Distance: <Text style={styles.boldText}>{miles}</Text> miles
           </Text>
@@ -26,14 +26,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 4,
     padding: 20,
-    paddingHorizontal: 30,
     flex: 1,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width - 25,
   },
   title: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 10,
     fontWeight: 'bold',
+  },
+  description: {
+    marginBottom: 10,
+    fontSize: 16,
   },
   boldText: {
     fontWeight: 'bold',

@@ -3,6 +3,7 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { client } from '../utils/api-client';
+import CustomCallout from './CustomCallout';
 
 const MapScreen = () => {
   const [status, setStatus] = React.useState('idle');
@@ -56,14 +57,7 @@ const MapScreen = () => {
                   title={hunt.name}
                   description={hunt.description}
                 >
-                  <Callout>
-                    <View>
-                      <View style={styles.bubble}>
-                        <Text style={styles.title}>{hunt.name}</Text>
-                        <Text>{hunt.description}</Text>
-                      </View>
-                    </View>
-                  </Callout>
+                  <CustomCallout hunt={hunt} />
                 </Marker>
               );
             }
@@ -83,18 +77,6 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
-  bubble: {
-    flexDirection: 'column',
-    alignSelf: 'flex-start',
-    backgroundColor: '#fff',
-    borderRadius: 4,
-    padding: 15,
-  },
-  title: {
-    fontSize: 16,
-    marginBottom: 5,
-    fontWeight: 'bold',
   },
 });
 

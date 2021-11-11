@@ -32,7 +32,7 @@ export default function App() {
         }}
       >
         <Tab.Screen
-          name="Map"
+          name="Explore our Scavenger Hunts!"
           component={MapScreen}
           options={{
             tabBarIcon: ({ focused }) => (

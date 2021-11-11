@@ -1,7 +1,7 @@
 import React from 'react';
 import { Callout } from 'react-native-maps';
 
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 const CustomCallout = ({ hunt: { distance_miles, name, description } }) => {
   const miles = Number(distance_miles).toFixed(2);
@@ -23,10 +23,12 @@ const CustomCallout = ({ hunt: { distance_miles, name, description } }) => {
 const styles = StyleSheet.create({
   bubble: {
     flexDirection: 'column',
-    alignSelf: 'flex-start',
     backgroundColor: '#fff',
     borderRadius: 4,
-    padding: 15,
+    padding: 20,
+    paddingHorizontal: 30,
+    flex: 1,
+    width: Dimensions.get('window').width,
   },
   title: {
     fontSize: 16,

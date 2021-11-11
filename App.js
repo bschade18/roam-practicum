@@ -46,7 +46,7 @@ export default function App() {
                 <FontAwesome5
                   name="map-marker-alt"
                   size={25}
-                  color={focused ? 'red' : 'gray'}
+                  color={focused ? 'black' : 'gray'}
                 ></FontAwesome5>
               </View>
             ),
@@ -66,7 +66,7 @@ export default function App() {
             top: '50%',
           }}
         >
-          <FontAwesome5 name="book" size={25}></FontAwesome5>
+          <FontAwesome5 name="book" size={25} color="gray"></FontAwesome5>
         </View>
       </Pressable>
     </NavigationContainer>

@@ -1,15 +1,57 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Pressable } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 import * as WebBrowser from 'expo-web-browser';
 import MapScreen from './components/MapScreen';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Navigator
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            position: 'absolute',
+            backgroundColor: 'white',
+            position: 'absolute',
+            bottom: 40,
+            marginHorizontal: 125,
+            height: 60,
+            borderRadius: 10,
+            shadowColor: '#000',
+            shadowOpacity: 0.06,
+            shadowOffset: {
+              width: 10,
+              height: 10,
+            },
+            paddingHorizontal: 20,
+          },
+        }}
+      >
+        <Tab.Screen
+          name="Map"
+          component={MapScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '15%',
+                }}
+              >
+                <FontAwesome5
+                  name="map-marker-alt"
+                  size={25}
+                  color={focused ? 'red' : 'gray'}
+                ></FontAwesome5>
+              </View>
+            ),
+          }}
+        />
       </Tab.Navigator>
       <Pressable
         style={styles.button}
@@ -18,7 +60,14 @@ export default function App() {
           WebBrowser.openBrowserAsync('http://letsroam.com/explorer/')
         }
       >
-        <Text style={styles.text}>Open Blog</Text>
+        <View
+          style={{
+            position: 'absolute',
+            top: '50%',
+          }}
+        >
+          <FontAwesome5 name="book" size={25}></FontAwesome5>
+        </View>
       </Pressable>
     </NavigationContainer>
   );
@@ -32,8 +81,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'blue',
-    marginTop: 200,
+    position: 'absolute',
+    bottom: 58,
+    marginLeft: 200,
   },
   text: {
     color: 'white',

@@ -3,15 +3,17 @@ import { Callout } from 'react-native-maps';
 
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-const CustomCallout = ({ hunt }) => {
-  const miles = Number(hunt.distance_miles).toFixed(2);
+const CustomCallout = ({ hunt: { distance_miles, name, description } }) => {
+  const miles = Number(distance_miles).toFixed(2);
   return (
     <Callout>
       <View>
         <View style={styles.bubble}>
-          <Text style={styles.title}>{hunt.name}</Text>
-          <Text>{hunt.description}</Text>
-          <Text>Distance: {miles} miles</Text>
+          <Text style={styles.title}>{name}</Text>
+          <Text>{description}</Text>
+          <Text>
+            Distance: <Text style={styles.boldText}>{miles}</Text> miles
+          </Text>
         </View>
       </View>
     </Callout>
@@ -29,6 +31,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     marginBottom: 5,
+    fontWeight: 'bold',
+  },
+  boldText: {
     fontWeight: 'bold',
   },
 });

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Callout } from 'react-native-maps';
 
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 
-const CustomCallout = ({ hunt: { distance_miles, name, description } }) => {
+const CustomCallout = ({
+  hunt: { distance_miles, name, description, photo_thumb },
+}) => {
   const miles = Number(distance_miles).toFixed(2);
   return (
     <Callout>
@@ -14,6 +16,12 @@ const CustomCallout = ({ hunt: { distance_miles, name, description } }) => {
           <Text>
             Distance: <Text style={styles.boldText}>{miles}</Text> miles
           </Text>
+          <Image
+            style={styles.huntThumb}
+            source={{
+              uri: `https://photos.letsroam.com/scavenger_hunt_locations/${photo_thumb}`,
+            }}
+          />
         </View>
       </View>
     </Callout>
@@ -40,6 +48,11 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: 'bold',
+  },
+  huntThumb: {
+    width: 150,
+    height: 150,
+    marginTop: 10,
   },
 });
 

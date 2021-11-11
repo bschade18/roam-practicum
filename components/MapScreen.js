@@ -31,38 +31,43 @@ const MapScreen = () => {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0,
-          longitudeDelta: 0.0,
-        }}
-      >
-        {isError && <Text>There was an error: {error.message}</Text>}
-        {isSuccess &&
-          data.map((hunt, index) => {
-            let latitude;
-            let longitude;
-            if (hunt.lat_long) {
-              [latitude, longitude] = hunt.lat_long.split(',');
-              latitude = Number(latitude);
-              longitude = Number(longitude);
+      {isLoading ? (
+        <Text>Loading Hunt Locations..</Text>
+      ) : isError ? (
+        <Text>There was an error: {error.message}</Text>
+      ) : (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0,
+            longitudeDelta: 0.0,
+          }}
+        >
+          {isSuccess &&
+            data.map((hunt, index) => {
+              let latitude;
+              let longitude;
+              if (hunt.lat_long) {
+                [latitude, longitude] = hunt.lat_long.split(',');
+                latitude = Number(latitude);
+                longitude = Number(longitude);
 
-              return (
-                <Marker
-                  key={index}
-                  coordinate={{ latitude, longitude }}
-                  title={hunt.name}
-                  description={hunt.description}
-                >
-                  <CustomCallout hunt={hunt} />
-                </Marker>
-              );
-            }
-          })}
-      </MapView>
+                return (
+                  <Marker
+                    key={index}
+                    coordinate={{ latitude, longitude }}
+                    title={hunt.name}
+                    description={hunt.description}
+                  >
+                    <CustomCallout hunt={hunt} />
+                  </Marker>
+                );
+              }
+            })}
+        </MapView>
+      )}
     </View>
   );
 };
